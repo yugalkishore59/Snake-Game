@@ -19,7 +19,6 @@ public class AppleController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.transform.tag=="Snake"){
             GoRandomPos();
-            Debug.Log("bam");
         }
     }
 

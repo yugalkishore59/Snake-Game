@@ -5,14 +5,15 @@ using UnityEngine;
 public class SnakeControls : MonoBehaviour
 {
     Vector2 direction = Vector2.right;
-    //Rigidbody2D rb;
     [SerializeField] GameObject body;
     List<GameObject> bodyList = new List<GameObject>();
 
     void Start()
     {
-        //rb = gameObject.GetComponent<Rigidbody2D>();
         bodyList.Add(gameObject);
+        for(int i=1;i<=3;i++){
+            SpawnBody();
+        }
     }
 
     void Update()
@@ -49,10 +50,21 @@ public class SnakeControls : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Apple"){
             SpawnBody();
+        }else if(other.gameObject.tag=="Snake"|| other.gameObject.tag=="Wall"){
+            ResetSnake();
         }
     }
 
     void SpawnBody(){
         bodyList.Add(Instantiate(body,bodyList[bodyList.Count-1].transform.position,transform.rotation));
+    }
+
+    void ResetSnake(){
+        for(int i=bodyList.Count-1;i>3;i--){
+            Destroy(bodyList[i]);
+            bodyList.RemoveAt(i);
+        }
+        transform.position = new Vector3(0,0,0);
+        direction = Vector2.right;
     }
 }
