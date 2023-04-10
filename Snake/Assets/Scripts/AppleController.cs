@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AppleController : MonoBehaviour
 {
-    int xMin=-31,xMax=31,yMin=-13,yMax=13;
+    int xMin=-24,xMax=24,yMin=-13,yMax=13;
 
     private void Start() {
         GoRandomPos();
